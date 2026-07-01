@@ -142,8 +142,7 @@
     text-transform: uppercase;
     line-height: 0.86;
   }
-  .hero h1 .ln2 { color: transparent; -webkit-text-stroke: 3px var(--ink); }
-  .hero h1 .wide-i { display: inline-block; width: 0.5em; text-align: center; }
+  .hero h1 .ln2 { color: transparent; -webkit-text-stroke: 3px var(--ink); white-space: nowrap; }
   .hero .tagline {
     font-size: clamp(1.05rem, 1.6vw, 1.3rem);
     max-width: 580px; margin-top: 30px; font-weight: 500;
@@ -154,7 +153,7 @@
     font-family: 'Space Grotesk', sans-serif; font-weight: 700;
     text-decoration: none; color: var(--ink); font-size: 1rem;
     padding: 14px 28px; border: var(--border); border-radius: 999px; box-shadow: var(--shadow);
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    transition: transform 0.22s ease-out, box-shadow 0.22s ease-out;
     display: inline-block;
   }
   .btn:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-lg); }
@@ -194,10 +193,14 @@
   .section-head p { max-width: 580px; margin-top: 14px; font-weight: 500; color: #2c3340; }
 
   /* ---------- INTERESTS (playful) ---------- */
-  #interests { background: var(--blue); color: var(--navy); }
-  #interests .eyebrow { background: var(--cream); color: var(--ink); }
-  #interests .section-head h2 { color: var(--navy); }
-  #interests .section-head p { color: rgba(17,6,35,0.72); }
+  #research { background: var(--blue); color: var(--navy); }
+  #research .eyebrow { background: var(--navy); color: var(--white); }
+  #research .section-head h2 { color: var(--navy); }
+  #research .section-head p { color: rgba(17,6,35,0.72); }
+  #interests { background: var(--navy); }
+  #interests .section-head h2 { color: var(--cream); }
+  #interests .section-head p { color: rgba(252,252,247,0.78); }
+  #interests .eyebrow { background: var(--cream); color: var(--navy); }
   .interest-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
   .interest-card {
     background: var(--card); color: var(--ink);
@@ -366,16 +369,24 @@
     color: transparent; -webkit-text-stroke: 2px rgba(17,6,35,0.10);
     pointer-events: none; user-select: none;
   }
-  #interests .snum { -webkit-text-stroke-color: rgba(17,6,35,0.12); }
-  #honors .snum   { -webkit-text-stroke-color: rgba(240,238,218,0.22); }
-  /* sage honors band */
-  #honors { background: var(--sage); color: var(--white); }
-  #honors .section-head h2 { color: var(--white); }
-  #honors .eyebrow { background: var(--cream); color: var(--ink); }
-  #honors .coursework .label { color: var(--white); }
-  #honors .section-head p { color: rgba(240,238,218,0.88); }
-  /* extra air on the colour bands for rhythm */
-  #interests, #honors { padding-top: 96px; padding-bottom: 96px; }
+  #research .snum  { -webkit-text-stroke-color: rgba(17,6,35,0.10); }
+  #honors .snum    { -webkit-text-stroke-color: rgba(17,6,35,0.08); }
+  #community .snum { -webkit-text-stroke-color: rgba(240,238,218,0.22); }
+  #interests .snum { -webkit-text-stroke-color: rgba(252,252,247,0.08); }
+  /* cream honors */
+  #honors { background: var(--cream); }
+  /* sage community band */
+  #community { background: var(--sage); }
+  #community .section-head h2 { color: var(--white); }
+  #community .eyebrow { background: var(--cream); color: var(--ink); }
+  #community .section-head p { color: rgba(240,238,218,0.88); }
+  /* extra air on colour bands */
+  #research, #interests, #honors, #community { padding-top: 96px; padding-bottom: 96px; }
+
+  /* lighter-tinted card backgrounds within each colored section */
+  #research .research-card { background: #c8dae8; }
+  #interests .interest-card { background: #e0dcea; }
+  #community .community-card { background: #c8d1bc; }
   /* staggered interest cards */
   .interest-card:nth-child(even) { margin-top: 34px; }
 
@@ -428,28 +439,29 @@
   }
 
   /* ---------- WORDLE ---------- */
-  #wordle { background: var(--navy); color: var(--cream); }
-  #wordle .section-head h2 { color: var(--cream); }
-  #wordle .eyebrow { background: var(--sage); color: var(--white); }
-  #wordle .section-head p { color: rgba(252,252,247,0.7); }
-  #wordle .snum { -webkit-text-stroke-color: rgba(252,252,247,0.06); }
-  .wordle-wrap { max-width: 380px; margin: 0 auto; }
+  #wordle { background: var(--cream); color: var(--ink); }
+  #wordle .section-head h2 { color: var(--ink); }
+  #wordle .eyebrow { background: var(--blue); color: var(--navy); }
+  #wordle .section-head p { color: #2c3340; }
+  #wordle .snum { -webkit-text-stroke-color: rgba(17,6,35,0.07); }
+  .wordle-wrap { max-width: 380px; margin: 0 auto; cursor: text; }
   .wordle-grid {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
-    margin-bottom: 24px;
+    margin-bottom: 24px; outline: none;
   }
   .w-cell {
-    aspect-ratio: 1; border: 3px solid rgba(252,252,247,0.25);
+    aspect-ratio: 1; border: 3px solid rgba(17,6,35,0.18);
     display: flex; align-items: center; justify-content: center;
     font-family: 'Archivo Black', sans-serif; font-size: 2rem;
-    text-transform: uppercase; color: var(--cream);
+    text-transform: uppercase; color: var(--ink);
     background: transparent;
     transition: border-color 0.1s ease;
   }
-  .w-cell.filled { border-color: rgba(252,252,247,0.6); }
+  .w-cell.filled { border-color: rgba(17,6,35,0.55); }
+  .w-cell.cursor { border-color: var(--ink); }
   .w-cell.correct { background: var(--sage);  border-color: var(--sage);  color: #fff; }
   .w-cell.present { background: #c9a227;       border-color: #c9a227;      color: #fff; }
-  .w-cell.absent  { background: #3a3a4a;       border-color: #3a3a4a;      color: rgba(252,252,247,0.5); }
+  .w-cell.absent  { background: #3a3a4a;       border-color: #3a3a4a;      color: rgba(252,252,247,0.7); }
   @keyframes wPop  { 0%,100%{transform:scale(1)} 50%{transform:scale(1.14)} }
   @keyframes wShake{ 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-6px)} 40%,80%{transform:translateX(6px)} }
   @keyframes wFlipOut { to { transform: rotateX(90deg); } }
@@ -461,24 +473,8 @@
   .wordle-msg {
     text-align: center; min-height: 2rem; margin-bottom: 20px;
     font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem;
-    letter-spacing: 0.04em; color: var(--cream);
+    letter-spacing: 0.04em; color: var(--ink);
   }
-  .wordle-kbd { display: flex; flex-direction: column; gap: 8px; }
-  .kbd-row { display: flex; justify-content: center; gap: 6px; }
-  .w-key {
-    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.8rem;
-    min-width: 36px; height: 52px; padding: 0 6px;
-    border: 2px solid rgba(252,252,247,0.2); border-radius: 6px;
-    background: rgba(252,252,247,0.08); color: var(--cream);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; user-select: none;
-    transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
-  }
-  .w-key:active { transform: scale(0.92); }
-  .w-key.wide   { min-width: 56px; font-size: 0.75rem; }
-  .w-key.correct { background: var(--sage);  border-color: var(--sage);  color: #fff; }
-  .w-key.present { background: #c9a227;       border-color: #c9a227;      color: #fff; }
-  .w-key.absent  { background: #2a2a38;       border-color: #2a2a38;      color: rgba(252,252,247,0.35); }
 
   /* ---------- MOTION ---------- */
   @keyframes fadeUp {
@@ -542,7 +538,7 @@
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow">Hunter College High School · NYC</span>
-      <h1>JAKE<br /><span class="ln2">CAPME<span class="wide-i">I</span>L</span></h1>
+      <h1>JAKE<br /><span class="ln2">CAPMEIL</span></h1>
       <p class="tagline">Student researcher working at the intersection of people, machines, and the physical world — from how we decide to ask AI instead of a human, to how the ocean floor shapes the waves above it.</p>
       <div class="hero-cta">
         <a href="#research" class="btn btn-blue">View Research</a>
@@ -620,14 +616,14 @@
     </div>
     <div class="honors-grid">
       <div class="honor-card">
-        <span class="tag">~4% Acceptance · Summer 2026</span>
+        <span class="tag">Summer 2026</span>
         <h3>CMU CS Scholars Program</h3>
         <p>Fully funded, merit-based residential program. Four weeks of college-level CS and math through project-based learning, culminating in a research presentation at the closing symposium.</p>
       </div>
       <div class="honor-card">
         <span class="tag alt">2025–26</span>
         <h3>Science Research Seminar</h3>
-        <p>Highly selective seminar preparing students for lab research — passed a qualifying exam and completed a rigorous accompanying course in Machine Learning and Advanced Python.</p>
+        <p>Highly selective seminar preparing students for lab research — passed a qualifying exam and completed a rigorous accompanying course in Machine Learning and Advanced Python. Trained in managing, processing, and analyzing research data.</p>
       </div>
       <div class="honor-card">
         <span class="tag alt">2025–26</span>
@@ -727,7 +723,7 @@
 <!-- WORDLE -->
 <section id="wordle">
   <div class="wrap">
-    <span class="snum" aria-hidden="true">W</span>
+    <span class="snum" aria-hidden="true">J</span>
     <div class="section-head">
       <span class="eyebrow">Mini Game</span>
       <h2>GUESS THE NAME</h2>
@@ -736,7 +732,6 @@
     <div class="wordle-wrap">
       <div class="wordle-grid" id="wGrid"></div>
       <div class="wordle-msg" id="wMsg"></div>
-      <div class="wordle-kbd" id="wKbd"></div>
     </div>
   </div>
 </section>
@@ -829,17 +824,16 @@
   /* ── Wordle ── */
   (function() {
     var WORD  = 'JAKE';
-    var ROWS  = 6;
+    var ROWS  = 4;
     var COLS  = 4;
     var row   = 0;
     var col   = 0;
     var guess = '';
     var over  = false;
     var cells = [];
-    var keyEls = {};
 
-    /* build grid */
     var grid = document.getElementById('wGrid');
+    grid.setAttribute('tabindex', '0');
     for (var r = 0; r < ROWS; r++) {
       cells[r] = [];
       for (var c = 0; c < COLS; c++) {
@@ -850,27 +844,16 @@
       }
     }
 
-    /* build keyboard */
-    var kbd = document.getElementById('wKbd');
-    var KBD_ROWS = [
-      ['Q','W','E','R','T','Y','U','I','O','P'],
-      ['A','S','D','F','G','H','J','K','L'],
-      ['ENTER','Z','X','C','V','B','N','M','⌫']
-    ];
-    KBD_ROWS.forEach(function(krow) {
-      var rowEl = document.createElement('div');
-      rowEl.className = 'kbd-row';
-      krow.forEach(function(k) {
-        var btn = document.createElement('button');
-        btn.className = 'w-key' + (k.length > 1 ? ' wide' : '');
-        btn.textContent = k;
-        btn.setAttribute('data-key', k);
-        btn.addEventListener('click', function() { handleKey(k); });
-        rowEl.appendChild(btn);
-        keyEls[k] = btn;
-      });
-      kbd.appendChild(rowEl);
-    });
+    function updateCursor() {
+      for (var r = 0; r < ROWS; r++)
+        for (var c = 0; c < COLS; c++)
+          cells[r][c].classList.remove('cursor');
+      if (!over && row < ROWS) cells[row][col < COLS ? col : COLS - 1].classList.add('cursor');
+    }
+    updateCursor();
+
+    document.querySelector('.wordle-wrap').addEventListener('click', function() { grid.focus(); });
+    grid.addEventListener('click', function() { grid.focus(); });
 
     function evaluate(g) {
       var res  = ['absent','absent','absent','absent'];
@@ -895,22 +878,6 @@
             setTimeout(function() {
               cell.classList.remove('flip-out');
               cell.classList.add(state, 'flip-in');
-              var letter = cell.textContent;
-              var key = keyEls[letter] || keyEls['⌫'];
-              key = keyEls[letter];
-              if (key) {
-                var cur = key.dataset.state || '';
-                if (cur !== 'correct') {
-                  if (state === 'correct' || (state === 'present' && cur !== 'correct')) {
-                    key.dataset.state = state;
-                    key.classList.remove('absent','present','correct');
-                    key.classList.add(state);
-                  } else if (!cur) {
-                    key.dataset.state = 'absent';
-                    key.classList.add('absent');
-                  }
-                }
-              }
               setTimeout(function() { cell.classList.remove('flip-in'); }, 180);
             }, 180);
           }, delay);
@@ -927,13 +894,8 @@
 
     function handleKey(k) {
       if (over) return;
-      if (k === '⌫' || k === 'BACKSPACE') {
-        if (col > 0) {
-          col--;
-          guess = guess.slice(0, -1);
-          cells[row][col].textContent = '';
-          cells[row][col].classList.remove('filled');
-        }
+      if (k === 'BACKSPACE') {
+        if (col > 0) { col--; guess = guess.slice(0,-1); cells[row][col].textContent = ''; cells[row][col].classList.remove('filled'); }
       } else if (k === 'ENTER') {
         if (col < COLS) { shakeRow(row); return; }
         var res = evaluate(guess);
@@ -944,34 +906,36 @@
         row++; col = 0; guess = '';
         if (won) {
           over = true;
-          var msgs = ['Genius!','Excellent!','Great!','Nice!','Close one!','Phew!'];
-          setTimeout(function() {
-            document.getElementById('wMsg').textContent = msgs[Math.min(row - 1, 5)];
-          }, COLS * 220 + 300);
+          var msgs = ['Genius!','Excellent!','Great!','Close one!'];
+          setTimeout(function() { document.getElementById('wMsg').textContent = msgs[Math.min(row-1,3)]; }, COLS*220+300);
         } else if (last) {
           over = true;
-          setTimeout(function() {
-            document.getElementById('wMsg').textContent = 'The answer was JAKE';
-          }, COLS * 220 + 300);
+          setTimeout(function() { document.getElementById('wMsg').textContent = 'The answer was JAKE'; }, COLS*220+300);
         }
       } else if (k.length === 1 && /[A-Z]/.test(k) && col < COLS) {
         var cell = cells[row][col];
-        cell.textContent = k;
-        cell.classList.add('filled');
-        cell.classList.remove('pop');
-        void cell.offsetWidth;
-        cell.classList.add('pop');
+        cell.textContent = k; cell.classList.add('filled');
+        cell.classList.remove('pop'); void cell.offsetWidth; cell.classList.add('pop');
         cell.addEventListener('animationend', function() { cell.classList.remove('pop'); }, { once: true });
-        guess += k;
-        col++;
+        guess += k; col++;
       }
+      updateCursor();
     }
 
-    document.addEventListener('keydown', function(e) {
+    function onKey(e) {
       if (e.ctrlKey || e.metaKey || e.altKey) return;
       var k = e.key.toUpperCase();
-      if (k === 'BACKSPACE') { handleKey('⌫'); }
-      else if (k === 'ENTER' || (k.length === 1 && /[A-Z]/.test(k))) { handleKey(k); }
+      if (k === 'BACKSPACE' || k === 'ENTER' || (k.length === 1 && /[A-Z]/.test(k))) {
+        handleKey(k);
+        e.preventDefault();
+      }
+    }
+    grid.addEventListener('keydown', onKey);
+    document.addEventListener('keydown', function(e) {
+      if (document.activeElement === grid) return;
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      var k = e.key.toUpperCase();
+      if (k === 'BACKSPACE' || k === 'ENTER' || (k.length === 1 && /[A-Z]/.test(k))) handleKey(k);
     });
   })();
 </script>
