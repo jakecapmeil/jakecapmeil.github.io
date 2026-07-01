@@ -143,7 +143,7 @@
     line-height: 0.86;
   }
   .hero h1 .ln2 { color: transparent; -webkit-text-stroke: 3px var(--ink); }
-  .hero h1 .wide-i { letter-spacing: 0.12em; }
+  .hero h1 .wide-i { display: inline-block; transform: scaleX(1.75); }
   .hero .tagline {
     font-size: clamp(1.05rem, 1.6vw, 1.3rem);
     max-width: 580px; margin-top: 30px; font-weight: 500;
@@ -362,6 +362,42 @@
     .interest-grid { grid-template-columns: 1fr; }
     .interest-card:nth-child(even) { margin-top: 0; }
   }
+
+  /* ---------- MOTION ---------- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(38px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes dotBounce {
+    0%   { transform: translateY(0); }
+    38%  { transform: translateY(-7px); }
+    70%  { transform: translateY(-2px); }
+    100% { transform: translateY(0); }
+  }
+
+  /* hero entrance */
+  .hero .eyebrow { animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.05s both; }
+  .hero h1       { animation: fadeUp 0.72s cubic-bezier(0.22,1,0.36,1) 0.18s both; }
+  .hero .tagline { animation: fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.33s both; }
+  .hero-cta      { animation: fadeUp 0.55s cubic-bezier(0.22,1,0.36,1) 0.46s both; }
+  .photo-frame   { animation: fadeIn 0.9s ease 0.12s both; }
+
+  /* nav brand dot */
+  .brand .dot { display: inline-block; }
+  .brand:hover .dot { animation: dotBounce 0.45s cubic-bezier(0.22,1,0.36,1); }
+
+  /* scroll reveal base state */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+                transform 0.6s cubic-bezier(0.22,1,0.36,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
@@ -583,9 +619,69 @@
 </footer>
 
 <script>
-  document.querySelectorAll('#navlinks a').forEach(function (a) {
-    a.addEventListener('click', function () {
+  // Mobile nav close on link click
+  document.querySelectorAll('#navlinks a').forEach(function(a) {
+    a.addEventListener('click', function() {
       document.getElementById('navlinks').classList.remove('open');
+    });
+  });
+
+  // Scroll reveal via IntersectionObserver
+  var revealObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  // Section heads — no stagger
+  document.querySelectorAll('.section-head, .collab-box').forEach(function(el) {
+    el.classList.add('reveal');
+    revealObs.observe(el);
+  });
+
+  // Card grids — staggered per grid
+  ['.interest-grid', '.research-grid', '.honors-grid', '.community-grid'].forEach(function(sel) {
+    document.querySelectorAll(sel + ' > *').forEach(function(card, i) {
+      card.classList.add('reveal');
+      card.style.transitionDelay = (i * 0.09) + 's';
+      revealObs.observe(card);
+    });
+  });
+
+  // Hero photo frame — cursor parallax
+  var hero = document.querySelector('.hero');
+  var frame = document.querySelector('.photo-frame');
+  if (hero && frame) {
+    hero.addEventListener('mousemove', function(e) {
+      var r = frame.getBoundingClientRect();
+      var dx = (e.clientX - (r.left + r.width  / 2)) / (r.width  * 0.5);
+      var dy = (e.clientY - (r.top  + r.height / 2)) / (r.height * 0.5);
+      frame.style.transition = 'transform 0.12s ease, box-shadow 0.3s ease';
+      frame.style.transform  = 'rotate(' + (-2.2 + dy * 2.5) + 'deg) translate(' + (dx * 11) + 'px, ' + (dy * 8) + 'px)';
+    });
+    hero.addEventListener('mouseleave', function() {
+      frame.style.transition = 'transform 0.65s ease, box-shadow 0.3s ease';
+      frame.style.transform  = '';
+    });
+  }
+
+  // Magnetic buttons
+  document.querySelectorAll('.btn').forEach(function(btn) {
+    btn.addEventListener('mousemove', function(e) {
+      var r = btn.getBoundingClientRect();
+      var x = (e.clientX - r.left - r.width  / 2) * 0.22;
+      var y = (e.clientY - r.top  - r.height / 2) * 0.22;
+      btn.style.transform  = 'translate(' + (x - 3) + 'px, ' + (y - 3) + 'px)';
+      btn.style.boxShadow  = '10px 10px 0 var(--ink)';
+      btn.style.transition = 'box-shadow 0.08s ease';
+    });
+    btn.addEventListener('mouseleave', function() {
+      btn.style.transform  = '';
+      btn.style.boxShadow  = '';
+      btn.style.transition = '';
     });
   });
 </script>
