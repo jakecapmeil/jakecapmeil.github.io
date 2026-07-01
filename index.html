@@ -143,7 +143,7 @@
     line-height: 0.86;
   }
   .hero h1 .ln2 { color: transparent; -webkit-text-stroke: 3px var(--ink); }
-  .hero h1 .wide-i { display: inline-block; transform: scaleX(1.75); }
+  .hero h1 .wide-i { display: inline-block; width: 0.5em; text-align: center; }
   .hero .tagline {
     font-size: clamp(1.05rem, 1.6vw, 1.3rem);
     max-width: 580px; margin-top: 30px; font-weight: 500;
@@ -202,10 +202,17 @@
   .interest-card {
     background: var(--card); color: var(--ink);
     border: var(--border); border-radius: 20px; box-shadow: var(--shadow);
-    padding: 26px 22px;
+    padding: 26px 22px; position: relative; overflow: hidden;
     transition: transform 0.14s ease, box-shadow 0.14s ease;
   }
   .interest-card:hover { transform: translate(-4px,-4px); box-shadow: var(--shadow-lg); }
+  .interest-card::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    opacity: 0.055; background-repeat: repeat;
+  }
+  .interest-card .ico,
+  .interest-card h3,
+  .interest-card p { position: relative; z-index: 1; }
   .interest-card .ico {
     width: 58px; height: 58px; display: grid; place-items: center;
     border: var(--border); border-radius: 50%; margin-bottom: 18px;
@@ -217,6 +224,38 @@
   .c-2 .ico { background: var(--blue); color: var(--white); }
   .c-3 .ico { background: var(--sage); color: var(--white); }
   .c-4 .ico { background: var(--cream); color: var(--navy); }
+  /* card background textures */
+  .c-1::before {
+    background-image: repeating-linear-gradient(
+      -55deg,
+      transparent 0, transparent 11px,
+      #110623 11px, #110623 12.5px
+    );
+  }
+  .c-2::before {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0, transparent 7px,
+      #110623 7px, #110623 8px,
+      transparent 8px, transparent 13px,
+      #110623 13px, #110623 14px,
+      transparent 14px, transparent 19px,
+      #110623 19px, #110623 20px,
+      transparent 20px, transparent 25px,
+      #110623 25px, #110623 26px,
+      transparent 26px, transparent 31px,
+      #110623 31px, #110623 32px,
+      transparent 32px, transparent 52px
+    );
+  }
+  .c-3::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='30'%3E%3Cpath d='M0,15 C10,5 20,5 40,15 C60,25 70,25 80,15' stroke='%23110623' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");
+    background-size: 80px 30px;
+  }
+  .c-4::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Crect x='1.5' y='1.5' width='25' height='25' fill='none' stroke='%23110623' stroke-width='1'/%3E%3Crect x='7' y='7' width='14' height='14' fill='none' stroke='%23110623' stroke-width='1'/%3E%3Crect x='11' y='11' width='6' height='6' fill='none' stroke='%23110623' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 28px 28px;
+  }
 
   /* ---------- RESEARCH (composed) ---------- */
   .research-grid { display: grid; grid-template-columns: 1.5fr 1fr; grid-auto-rows: 1fr; gap: 24px; }
@@ -363,6 +402,84 @@
     .interest-card:nth-child(even) { margin-top: 0; }
   }
 
+  /* ---------- INTRO OVERLAY ---------- */
+  #intro-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    perspective: 1000px;
+    transition: opacity 0.55s ease;
+  }
+  #intro-overlay.hidden { opacity: 0; pointer-events: none; }
+  .intro-name {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(3.8rem, 11vw, 9rem);
+    color: var(--cream);
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 0.86;
+    animation: introSpin 1.3s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+  }
+  .intro-name .intro-ln2 { color: transparent; -webkit-text-stroke: 3px var(--cream); }
+  @keyframes introSpin {
+    0%   { opacity: 0; transform: rotateY(0deg); }
+    12%  { opacity: 1; }
+    100% { opacity: 1; transform: rotateY(360deg); }
+  }
+
+  /* ---------- WORDLE ---------- */
+  #wordle { background: var(--navy); color: var(--cream); }
+  #wordle .section-head h2 { color: var(--cream); }
+  #wordle .eyebrow { background: var(--sage); color: var(--white); }
+  #wordle .section-head p { color: rgba(252,252,247,0.7); }
+  #wordle .snum { -webkit-text-stroke-color: rgba(252,252,247,0.06); }
+  .wordle-wrap { max-width: 380px; margin: 0 auto; }
+  .wordle-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    margin-bottom: 24px;
+  }
+  .w-cell {
+    aspect-ratio: 1; border: 3px solid rgba(252,252,247,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Archivo Black', sans-serif; font-size: 2rem;
+    text-transform: uppercase; color: var(--cream);
+    background: transparent;
+    transition: border-color 0.1s ease;
+  }
+  .w-cell.filled { border-color: rgba(252,252,247,0.6); }
+  .w-cell.correct { background: var(--sage);  border-color: var(--sage);  color: #fff; }
+  .w-cell.present { background: #c9a227;       border-color: #c9a227;      color: #fff; }
+  .w-cell.absent  { background: #3a3a4a;       border-color: #3a3a4a;      color: rgba(252,252,247,0.5); }
+  @keyframes wPop  { 0%,100%{transform:scale(1)} 50%{transform:scale(1.14)} }
+  @keyframes wShake{ 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-6px)} 40%,80%{transform:translateX(6px)} }
+  @keyframes wFlipOut { to { transform: rotateX(90deg); } }
+  @keyframes wFlipIn  { from { transform: rotateX(90deg); } }
+  .w-cell.pop   { animation: wPop   0.12s ease; }
+  .w-cell.shake { animation: wShake 0.4s ease; }
+  .w-cell.flip-out { animation: wFlipOut 0.18s ease-in  forwards; }
+  .w-cell.flip-in  { animation: wFlipIn  0.18s ease-out forwards; }
+  .wordle-msg {
+    text-align: center; min-height: 2rem; margin-bottom: 20px;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem;
+    letter-spacing: 0.04em; color: var(--cream);
+  }
+  .wordle-kbd { display: flex; flex-direction: column; gap: 8px; }
+  .kbd-row { display: flex; justify-content: center; gap: 6px; }
+  .w-key {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.8rem;
+    min-width: 36px; height: 52px; padding: 0 6px;
+    border: 2px solid rgba(252,252,247,0.2); border-radius: 6px;
+    background: rgba(252,252,247,0.08); color: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; user-select: none;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+  }
+  .w-key:active { transform: scale(0.92); }
+  .w-key.wide   { min-width: 56px; font-size: 0.75rem; }
+  .w-key.correct { background: var(--sage);  border-color: var(--sage);  color: #fff; }
+  .w-key.present { background: #c9a227;       border-color: #c9a227;      color: #fff; }
+  .w-key.absent  { background: #2a2a38;       border-color: #2a2a38;      color: rgba(252,252,247,0.35); }
+
   /* ---------- MOTION ---------- */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(38px); }
@@ -401,6 +518,10 @@
 </style>
 </head>
 <body>
+
+<div id="intro-overlay" aria-hidden="true">
+  <div class="intro-name">JAKE<br><span class="intro-ln2">CAPMEIL</span></div>
+</div>
 
 <nav>
   <div class="nav-inner">
@@ -568,37 +689,54 @@
     <div class="section-head">
       <span class="eyebrow">Off the Clock</span>
       <h2>Personal Interests</h2>
-      <p>The disciplines that keep the research sharp — rhythm, sound, distance, and a steady stack of books.</p>
+      <p>The pursuits that keep life interesting — running, music, the outdoors, and a lifelong love of history.</p>
     </div>
     <div class="interest-grid">
       <div class="interest-card c-1">
         <div class="ico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 13V9"/><path d="M9 2h6"/><path d="M19.5 5.5l-1.4 1.4"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="4" r="2"/><path d="M14 6L11 14M11 14L7 20M11 14L15 20M12.5 9L9 12M12.5 9L17 12"/></svg>
         </div>
-        <h3>Track &amp; XC</h3>
-        <p>800m runner and year-round varsity athlete, training seven days a week — chasing rhythm, splits, and the next PR.</p>
+        <h3>Track &amp; Cross Country</h3>
+        <p>As captain of my school's running teams, I specialize in the 800m. At the Cities championship, I placed 4th in the 800m and 2nd in the 4×400m relay.</p>
       </div>
       <div class="interest-card c-2">
         <div class="ico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17V4l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
         </div>
         <h3>Music</h3>
-        <p>Guitarist and pianist who writes, mixes, and produces — building tracks from the first riff to the final master.</p>
+        <p>Music runs through everything I do. I produce my own tracks and play piano in a band, where I also handle production and mastering for our songs.</p>
       </div>
       <div class="interest-card c-3">
         <div class="ico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l6.5-13 4 7.5"/><path d="M9.5 13l5.5 7"/><path d="M21 20l-5-9"/><circle cx="16.5" cy="6.5" r="1.6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18l4-9 4 5.5 3.5-5 5 8.5"/><path d="M1 21c2-2 4 0 6 0s4-2 6 0 4 0 6-1"/></svg>
         </div>
-        <h3>Hiking</h3>
-        <p>Weekends spent off the grid — trading screens for switchbacks and long climbs to the view at the top.</p>
+        <h3>Outdoors</h3>
+        <p>Surfing, skiing, and hiking keep me grounded. In an increasingly connected world, time outdoors is how I recenter, and I start to miss it the moment I've gone too long without it.</p>
       </div>
       <div class="interest-card c-4">
         <div class="ico">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v16H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20v3H6.5A2.5 2.5 0 0 1 4 20.5z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         </div>
-        <h3>Reading</h3>
-        <p>A steady habit across fiction and science — where most of the good questions and ideas tend to start.</p>
+        <h3>Humanities</h3>
+        <p>History and linguistics have fascinated me since childhood, from the fall of Byzantium to the rise of the Ilkhanate. That curiosity has since grown into a deep interest in the politics shaping our modern world.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORDLE -->
+<section id="wordle">
+  <div class="wrap">
+    <span class="snum" aria-hidden="true">W</span>
+    <div class="section-head">
+      <span class="eyebrow">Mini Game</span>
+      <h2>GUESS THE NAME</h2>
+      <p>6 tries. 4 letters. You probably know it.</p>
+    </div>
+    <div class="wordle-wrap">
+      <div class="wordle-grid" id="wGrid"></div>
+      <div class="wordle-msg" id="wMsg"></div>
+      <div class="wordle-kbd" id="wKbd"></div>
     </div>
   </div>
 </section>
@@ -619,14 +757,23 @@
 </footer>
 
 <script>
-  // Mobile nav close on link click
+  /* ── Mobile nav ── */
   document.querySelectorAll('#navlinks a').forEach(function(a) {
     a.addEventListener('click', function() {
       document.getElementById('navlinks').classList.remove('open');
     });
   });
 
-  // Scroll reveal via IntersectionObserver
+  /* ── Intro overlay ── */
+  var introOverlay = document.getElementById('intro-overlay');
+  if (introOverlay) {
+    setTimeout(function() {
+      introOverlay.classList.add('hidden');
+      setTimeout(function() { introOverlay.remove(); }, 560);
+    }, 1800);
+  }
+
+  /* ── Scroll reveal ── */
   var revealObs = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -636,13 +783,9 @@
     });
   }, { threshold: 0.12 });
 
-  // Section heads — no stagger
   document.querySelectorAll('.section-head, .collab-box').forEach(function(el) {
-    el.classList.add('reveal');
-    revealObs.observe(el);
+    el.classList.add('reveal'); revealObs.observe(el);
   });
-
-  // Card grids — staggered per grid
   ['.interest-grid', '.research-grid', '.honors-grid', '.community-grid'].forEach(function(sel) {
     document.querySelectorAll(sel + ' > *').forEach(function(card, i) {
       card.classList.add('reveal');
@@ -651,16 +794,16 @@
     });
   });
 
-  // Hero photo frame — cursor parallax
-  var hero = document.querySelector('.hero');
+  /* ── Photo parallax ── */
+  var hero  = document.querySelector('.hero');
   var frame = document.querySelector('.photo-frame');
   if (hero && frame) {
     hero.addEventListener('mousemove', function(e) {
-      var r = frame.getBoundingClientRect();
+      var r  = frame.getBoundingClientRect();
       var dx = (e.clientX - (r.left + r.width  / 2)) / (r.width  * 0.5);
       var dy = (e.clientY - (r.top  + r.height / 2)) / (r.height * 0.5);
       frame.style.transition = 'transform 0.12s ease, box-shadow 0.3s ease';
-      frame.style.transform  = 'rotate(' + (-2.2 + dy * 2.5) + 'deg) translate(' + (dx * 11) + 'px, ' + (dy * 8) + 'px)';
+      frame.style.transform  = 'rotate(' + (-2.2 + dy * 2.5) + 'deg) translate(' + (dx * 11) + 'px,' + (dy * 8) + 'px)';
     });
     hero.addEventListener('mouseleave', function() {
       frame.style.transition = 'transform 0.65s ease, box-shadow 0.3s ease';
@@ -668,22 +811,169 @@
     });
   }
 
-  // Magnetic buttons
+  /* ── Magnetic buttons ── */
   document.querySelectorAll('.btn').forEach(function(btn) {
     btn.addEventListener('mousemove', function(e) {
       var r = btn.getBoundingClientRect();
       var x = (e.clientX - r.left - r.width  / 2) * 0.22;
       var y = (e.clientY - r.top  - r.height / 2) * 0.22;
-      btn.style.transform  = 'translate(' + (x - 3) + 'px, ' + (y - 3) + 'px)';
+      btn.style.transform  = 'translate(' + (x - 3) + 'px,' + (y - 3) + 'px)';
       btn.style.boxShadow  = '10px 10px 0 var(--ink)';
       btn.style.transition = 'box-shadow 0.08s ease';
     });
     btn.addEventListener('mouseleave', function() {
-      btn.style.transform  = '';
-      btn.style.boxShadow  = '';
-      btn.style.transition = '';
+      btn.style.transform = btn.style.boxShadow = btn.style.transition = '';
     });
   });
+
+  /* ── Wordle ── */
+  (function() {
+    var WORD  = 'JAKE';
+    var ROWS  = 6;
+    var COLS  = 4;
+    var row   = 0;
+    var col   = 0;
+    var guess = '';
+    var over  = false;
+    var cells = [];
+    var keyEls = {};
+
+    /* build grid */
+    var grid = document.getElementById('wGrid');
+    for (var r = 0; r < ROWS; r++) {
+      cells[r] = [];
+      for (var c = 0; c < COLS; c++) {
+        var cell = document.createElement('div');
+        cell.className = 'w-cell';
+        grid.appendChild(cell);
+        cells[r][c] = cell;
+      }
+    }
+
+    /* build keyboard */
+    var kbd = document.getElementById('wKbd');
+    var KBD_ROWS = [
+      ['Q','W','E','R','T','Y','U','I','O','P'],
+      ['A','S','D','F','G','H','J','K','L'],
+      ['ENTER','Z','X','C','V','B','N','M','⌫']
+    ];
+    KBD_ROWS.forEach(function(krow) {
+      var rowEl = document.createElement('div');
+      rowEl.className = 'kbd-row';
+      krow.forEach(function(k) {
+        var btn = document.createElement('button');
+        btn.className = 'w-key' + (k.length > 1 ? ' wide' : '');
+        btn.textContent = k;
+        btn.setAttribute('data-key', k);
+        btn.addEventListener('click', function() { handleKey(k); });
+        rowEl.appendChild(btn);
+        keyEls[k] = btn;
+      });
+      kbd.appendChild(rowEl);
+    });
+
+    function evaluate(g) {
+      var res  = ['absent','absent','absent','absent'];
+      var wArr = WORD.split('');
+      var gArr = g.split('');
+      for (var i = 0; i < COLS; i++) {
+        if (gArr[i] === wArr[i]) { res[i] = 'correct'; wArr[i] = null; gArr[i] = null; }
+      }
+      for (var i = 0; i < COLS; i++) {
+        if (!gArr[i]) continue;
+        var idx = wArr.indexOf(gArr[i]);
+        if (idx !== -1) { res[i] = 'present'; wArr[idx] = null; }
+      }
+      return res;
+    }
+
+    function revealRow(r, res) {
+      res.forEach(function(state, c) {
+        (function(cell, state, delay) {
+          setTimeout(function() {
+            cell.classList.add('flip-out');
+            setTimeout(function() {
+              cell.classList.remove('flip-out');
+              cell.classList.add(state, 'flip-in');
+              var letter = cell.textContent;
+              var key = keyEls[letter] || keyEls['⌫'];
+              key = keyEls[letter];
+              if (key) {
+                var cur = key.dataset.state || '';
+                if (cur !== 'correct') {
+                  if (state === 'correct' || (state === 'present' && cur !== 'correct')) {
+                    key.dataset.state = state;
+                    key.classList.remove('absent','present','correct');
+                    key.classList.add(state);
+                  } else if (!cur) {
+                    key.dataset.state = 'absent';
+                    key.classList.add('absent');
+                  }
+                }
+              }
+              setTimeout(function() { cell.classList.remove('flip-in'); }, 180);
+            }, 180);
+          }, delay);
+        })(cells[r][c], state, c * 220);
+      });
+    }
+
+    function shakeRow(r) {
+      cells[r].forEach(function(c) {
+        c.classList.add('shake');
+        c.addEventListener('animationend', function() { c.classList.remove('shake'); }, { once: true });
+      });
+    }
+
+    function handleKey(k) {
+      if (over) return;
+      if (k === '⌫' || k === 'BACKSPACE') {
+        if (col > 0) {
+          col--;
+          guess = guess.slice(0, -1);
+          cells[row][col].textContent = '';
+          cells[row][col].classList.remove('filled');
+        }
+      } else if (k === 'ENTER') {
+        if (col < COLS) { shakeRow(row); return; }
+        var res = evaluate(guess);
+        var currentRow = row;
+        revealRow(currentRow, res);
+        var won = guess === WORD;
+        var last = row === ROWS - 1;
+        row++; col = 0; guess = '';
+        if (won) {
+          over = true;
+          var msgs = ['Genius!','Excellent!','Great!','Nice!','Close one!','Phew!'];
+          setTimeout(function() {
+            document.getElementById('wMsg').textContent = msgs[Math.min(row - 1, 5)];
+          }, COLS * 220 + 300);
+        } else if (last) {
+          over = true;
+          setTimeout(function() {
+            document.getElementById('wMsg').textContent = 'The answer was JAKE';
+          }, COLS * 220 + 300);
+        }
+      } else if (k.length === 1 && /[A-Z]/.test(k) && col < COLS) {
+        var cell = cells[row][col];
+        cell.textContent = k;
+        cell.classList.add('filled');
+        cell.classList.remove('pop');
+        void cell.offsetWidth;
+        cell.classList.add('pop');
+        cell.addEventListener('animationend', function() { cell.classList.remove('pop'); }, { once: true });
+        guess += k;
+        col++;
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      var k = e.key.toUpperCase();
+      if (k === 'BACKSPACE') { handleKey('⌫'); }
+      else if (k === 'ENTER' || (k.length === 1 && /[A-Z]/.test(k))) { handleKey(k); }
+    });
+  })();
 </script>
 </body>
 </html>
