@@ -142,7 +142,7 @@
     text-transform: uppercase;
     line-height: 0.86;
   }
-  .hero h1 .ln2 { color: transparent; -webkit-text-stroke: 3px var(--ink); white-space: nowrap; }
+  .hero h1 .ln2 { color: transparent; -webkit-text-stroke: 3px var(--ink); white-space: nowrap; letter-spacing: 0.06em; }
   .hero .tagline {
     font-size: clamp(1.05rem, 1.6vw, 1.3rem);
     max-width: 580px; margin-top: 30px; font-weight: 500;
@@ -156,7 +156,7 @@
     transition: transform 0.22s ease-out, box-shadow 0.22s ease-out;
     display: inline-block;
   }
-  .btn:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-lg); }
+  .btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
   .btn-navy { background: var(--navy); color: var(--white); }
   .btn-ghost { background: var(--white); }
   .btn-blue { background: var(--blue); color: var(--navy);}
@@ -172,7 +172,7 @@
     transform: rotate(-2.2deg);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .photo-frame:hover { transform: rotate(0deg) scale(1.01); box-shadow: 16px 16px 0 var(--blue); }
+  .photo-frame:hover { transform: rotate(-2.2deg) scale(1.03); box-shadow: 14px 14px 0 var(--blue); }
   .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .photo-frame .tag-float {
     position: absolute; bottom: 14px; left: 14px;
@@ -261,10 +261,7 @@
   }
 
   /* ---------- RESEARCH (composed) ---------- */
-  .research-grid { display: grid; grid-template-columns: 1.5fr 1fr; grid-auto-rows: 1fr; gap: 24px; }
-  .research-card:first-child { grid-row: span 2; }
-  .research-card:first-child h3 { font-size: clamp(1.8rem, 3vw, 2.5rem); }
-  .research-card:first-child p { font-size: 1.02rem; }
+  .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .research-card {
     background: var(--card); border: var(--border); border-radius: 20px;
     padding: 28px 26px; display: flex; flex-direction: column;
@@ -394,8 +391,6 @@
   @media (max-width: 980px) {
     .interest-grid { grid-template-columns: repeat(2, 1fr); }
     .research-grid, .community-grid, .honors-grid { grid-template-columns: 1fr; }
-    .research-card:first-child { grid-row: auto; }
-    .research-card:first-child h3 { font-size: 1.5rem; }
   }
   @media (max-width: 760px) {
     .hero-grid { grid-template-columns: 1fr; }
@@ -431,7 +426,7 @@
     line-height: 0.86;
     animation: introSpin 1.3s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
   }
-  .intro-name .intro-ln2 { color: transparent; -webkit-text-stroke: 3px var(--cream); }
+  .intro-name .intro-ln2 { color: transparent; -webkit-text-stroke: 3px var(--cream); letter-spacing: 0.06em; }
   @keyframes introSpin {
     0%   { opacity: 0; transform: rotateY(0deg); }
     12%  { opacity: 1; }
@@ -789,37 +784,6 @@
     });
   });
 
-  /* ── Photo parallax ── */
-  var hero  = document.querySelector('.hero');
-  var frame = document.querySelector('.photo-frame');
-  if (hero && frame) {
-    hero.addEventListener('mousemove', function(e) {
-      var r  = frame.getBoundingClientRect();
-      var dx = (e.clientX - (r.left + r.width  / 2)) / (r.width  * 0.5);
-      var dy = (e.clientY - (r.top  + r.height / 2)) / (r.height * 0.5);
-      frame.style.transition = 'transform 0.12s ease, box-shadow 0.3s ease';
-      frame.style.transform  = 'rotate(' + (-2.2 + dy * 2.5) + 'deg) translate(' + (dx * 11) + 'px,' + (dy * 8) + 'px)';
-    });
-    hero.addEventListener('mouseleave', function() {
-      frame.style.transition = 'transform 0.65s ease, box-shadow 0.3s ease';
-      frame.style.transform  = '';
-    });
-  }
-
-  /* ── Magnetic buttons ── */
-  document.querySelectorAll('.btn').forEach(function(btn) {
-    btn.addEventListener('mousemove', function(e) {
-      var r = btn.getBoundingClientRect();
-      var x = (e.clientX - r.left - r.width  / 2) * 0.22;
-      var y = (e.clientY - r.top  - r.height / 2) * 0.22;
-      btn.style.transform  = 'translate(' + (x - 3) + 'px,' + (y - 3) + 'px)';
-      btn.style.boxShadow  = '10px 10px 0 var(--ink)';
-      btn.style.transition = 'box-shadow 0.08s ease';
-    });
-    btn.addEventListener('mouseleave', function() {
-      btn.style.transform = btn.style.boxShadow = btn.style.transition = '';
-    });
-  });
 
   /* ── Wordle ── */
   (function() {
