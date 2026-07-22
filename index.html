@@ -221,9 +221,32 @@
   .dot-live {
     width: 8px; height: 8px; border-radius: 50%; background: #4C9A6A; flex-shrink: 0;
   }
-  .strip-text { flex: 1; font-size: 0.98rem; color: var(--muted); min-width: 300px; line-height: 1.55; }
+  .seek-box {
+    flex: 1; min-width: 300px;
+    display: flex; align-items: center; gap: 16px;
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 16px 22px;
+    box-shadow: 0 1px 2px rgba(16,24,40,0.03);
+  }
+  .strip-text { flex: 1; font-size: 0.98rem; color: var(--muted); line-height: 1.55; }
   .strip-text strong { color: var(--ink); font-weight: 600; }
   .strip-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* availability on/off switch — snaps back to on */
+  .switch {
+    flex-shrink: 0; width: 44px; height: 24px; padding: 0;
+    border: 1px solid #CFD6DF; border-radius: 999px; background: var(--offwhite-2);
+    position: relative; cursor: pointer;
+    transition: background 0.25s ease, border-color 0.25s ease;
+  }
+  .switch-knob {
+    position: absolute; top: 2px; left: 2px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #fff; box-shadow: 0 1px 2px rgba(16,24,40,0.25);
+    transition: left 0.25s cubic-bezier(0.4,0,0.2,1);
+  }
+  .switch.on { background: #4C9A6A; border-color: #4C9A6A; }
+  .switch.on .switch-knob { left: 22px; }
 
   /* ---------- MEDIA PLACEHOLDER ---------- */
   .media {
@@ -445,8 +468,10 @@
 <!-- CONTACT STRIP -->
 <div class="strip">
   <div class="wrap strip-box">
-    <span class="dot-live"></span>
-    <p class="strip-text">Currently seeking <strong>internships and research opportunities in the New York area</strong>. Open to machine learning research, full-stack software, and hands-on lab and engineering work. The fastest way to reach me is email, but I am on LinkedIn and GitHub too.</p>
+    <div class="seek-box">
+      <button type="button" class="switch on" id="availSwitch" role="switch" aria-checked="true" aria-label="Available for opportunities" title="Available for opportunities"><span class="switch-knob"></span></button>
+      <p class="strip-text">Currently seeking <strong>internships and research opportunities in the New York area</strong>. Open to machine learning research, full-stack software, and hands-on lab and engineering work. The fastest way to reach me is by email, but I am on LinkedIn and GitHub too.</p>
+    </div>
     <div class="strip-actions">
       <a href="https://www.linkedin.com/in/jake-capmeil/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://github.com/jakecapmeil" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>
@@ -484,7 +509,7 @@
       <div>
         <p class="meta">Carnegie Mellon University · Summer 2026</p>
         <h3>Threshold Tuning Under Class Imbalance for Predicting Student Preference in AI-Assisted Tutoring</h3>
-        <p>Mentored research at Carnegie Mellon's CS Scholars Program modeling student preference for AI versus human tutoring. I compared three classifiers using stratified k-fold cross-validation, optimized for MCC, and applied threshold tuning to correct for class imbalance in a small self-collected dataset. It stands as a proof of concept for prediction under the data constraints most institutions actually face.</p>
+        <p>Mentored research at Carnegie Mellon's CS Scholars Program modeling student preference for AI versus human tutoring. I compared three classifiers using k-fold cross-validation, optimized for MCC, and applied threshold tuning to correct for class imbalance in a small self-collected dataset. It stands as a proof of concept for prediction under the data constraints most institutions actually face.</p>
         <div class="labels">
           <span class="pill">Machine Learning</span>
           <span class="pill">Python</span>
@@ -511,7 +536,7 @@
       <article class="project-card reveal">
         <div class="media"><img src="bloom.png" alt="Bloom habit-tracker growing-tree UI" loading="lazy" /></div>
         <div class="project-body">
-          <p class="meta">Solo · 2025</p>
+          <p class="meta">Solo · 2026</p>
           <h3>Bloom</h3>
           <p>Full-stack habit-tracking app on Cloudflare Workers with Google authentication, a Supabase backend, and a built-in AI coach. Progress renders as a growing tree, translating streak consistency into visible growth.</p>
           <div class="card-foot">
@@ -528,7 +553,7 @@
       <article class="project-card reveal">
         <div class="media"><img src="chroma1.png" alt="Khromate" loading="lazy" /></div>
         <div class="project-body">
-          <p class="meta">Solo · 2025</p>
+          <p class="meta">Solo · 2026</p>
           <h3>Khromate</h3>
           <p>Generative art platform where users produce royalty-free work from coded algorithms, then download it or publish it to a shared in-site gallery.</p>
           <div class="card-foot">
@@ -546,7 +571,7 @@
         <div class="project-body">
           <p class="meta">Solo · 2024</p>
           <h3>Bathymetric Control of Breaking Wave Height in Shoaling Nearshore Environments</h3>
-          <p>Designed and built a working wave tank with interchangeable seafloor topographies to quantify how slope, depth, and contour reshape a wave. I measured propagation and shoaling across each model.</p>
+          <p>Designed and built a working wave tank with interchangeable seafloor topographies to quantify how slope, depth, and contour reshape a wave. Measured propagation and shoaling across each model.</p>
           <div class="labels">
             <span class="pill">Physics</span>
             <span class="pill">Fluid Dynamics</span>
@@ -617,6 +642,7 @@
           <span class="pill">Agent Workflows</span>
           <span class="pill">CLAUDE.md Specs</span>
           <span class="pill">AI-Assisted Data Analysis</span>
+          <span class="pill">AI In-App Implementation</span>
           <span class="pill">End-to-End Deployment</span>
         </div>
       </div>
@@ -723,7 +749,7 @@
     <div class="section-head reveal">
       <div class="rule"></div>
       <span class="eyebrow"><span class="snum">05</span> Community</span>
-      <h2>Community Impact</h2>
+      <h2>Work and Community Impact</h2>
       <p>Building things that reach beyond the lab and the track.</p>
     </div>
     <div class="community-grid">
@@ -740,7 +766,7 @@
       <div class="community-card reveal">
         <span class="when">2025–Present</span>
         <h3>Catholic Church Volunteer</h3>
-        <p>Biweekly refugee clothing drives, multilingual book drives, and general property maintenance for the parish community.</p>
+        <p>Biweekly refugee clothing drives, multilingual book drives, and general property maintenance for the parish community, which I serve as a non-religious volunteer.</p>
       </div>
       <div class="community-card reveal">
         <span class="when">2024–Present</span>
@@ -773,6 +799,20 @@
       document.getElementById('navlinks').classList.remove('open');
     });
   });
+
+  /* Availability switch: user can flick it off, but it snaps back to on */
+  var availSwitch = document.getElementById('availSwitch');
+  if (availSwitch) {
+    availSwitch.addEventListener('click', function () {
+      if (!availSwitch.classList.contains('on')) return;
+      availSwitch.classList.remove('on');
+      availSwitch.setAttribute('aria-checked', 'false');
+      setTimeout(function () {
+        availSwitch.classList.add('on');
+        availSwitch.setAttribute('aria-checked', 'true');
+      }, 520);
+    });
+  }
 
   /* Reveal on scroll */
   var io = new IntersectionObserver(function (entries) {
