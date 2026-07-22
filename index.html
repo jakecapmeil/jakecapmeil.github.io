@@ -313,7 +313,7 @@
   a.course-pill:hover { background: rgba(120,162,191,0.12); }
 
   /* ---------- COMMUNITY ---------- */
-  .community-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .community-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
   .community-card {
     background: var(--white); border: 1px solid var(--line);
     border-radius: var(--radius); padding: 30px;
@@ -377,6 +377,7 @@
     <div class="nav-links" id="navlinks">
       <a href="#research">Research</a>
       <a href="#projects">Projects</a>
+      <a href="#toolkit">Toolkit</a>
       <a href="#academics">Academics</a>
       <a href="#community">Community</a>
       <a href="Jake_Capmeil_Resume.pdf" class="resume" download>Résumé</a>
@@ -396,7 +397,7 @@
   </svg>
   <div class="wrap hero-grid">
     <div>
-      <p class="loc">Brooklyn, NY · Hunter College High School</p>
+      <p class="loc">Brooklyn, NY · Hunter College High School · Class of 2028</p>
       <h1>Jake Capmeil</h1>
       <p class="tagline">Student researcher focused on autonomous vehicles, robotics, and the systems that make them work.</p>
       <div class="hero-cta">
@@ -449,15 +450,17 @@
     <div class="research-row reveal">
       <div>
         <p class="meta">Carnegie Mellon University · Summer 2026</p>
-        <h3>AI or a Human?</h3>
-        <p>Mentored research at Carnegie Mellon's CS Scholars Program modeling how likely people are to turn to AI instead of another person for study help. I sampled across age, education, and academic rigor, and built a custom machine learning model in Python to analyze the results.</p>
+        <h3>Threshold Tuning Under Class Imbalance for Predicting Student Preference in AI-Assisted Tutoring</h3>
+        <p style="font-style: italic; color: var(--muted-dark); margin: -6px 0 16px; font-size: 0.98rem;">“AI or a Human?”</p>
+        <p>Mentored research at Carnegie Mellon's CS Scholars Program modeling student preference for AI versus human tutoring. I compared three classifiers using stratified k-fold cross-validation, optimized for MCC, and applied threshold tuning to correct for class imbalance in a small self-collected dataset — a proof of concept for prediction under the data constraints most institutions actually face.</p>
         <div class="labels">
           <span class="pill">Machine Learning</span>
           <span class="pill">Python</span>
           <span class="pill">Study Design</span>
+          <span class="pill">Statistical Modeling</span>
         </div>
       </div>
-      <div class="media">Image</div>
+      <div class="media"><img src="research.png" alt="Logistic regression decision boundary over PCA components" loading="lazy" /></div>
     </div>
   </div>
 </section>
@@ -469,20 +472,37 @@
       <div class="rule"></div>
       <span class="eyebrow"><span class="snum">02</span> Projects</span>
       <h2>Selected Projects</h2>
-      <p>Designing, building, and testing across a range of engineering interests.</p>
+      <p>Software I've shipped and hardware I've built and tested.</p>
     </div>
     <div class="project-grid">
 
       <article class="project-card reveal">
-        <div class="media"><img src="chroma1.png" alt="Khromate" loading="lazy" /></div>
+        <div class="media"><img src="bloom.png" alt="Bloom habit-tracker growing-tree UI" loading="lazy" /></div>
         <div class="project-body">
-          <p class="meta">Placeholder · Year</p>
-          <h3>Khromate</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder copy pending final project description — details to be supplied. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p class="meta">Solo · 2025</p>
+          <h3>Bloom</h3>
+          <p>Full-stack habit-tracking app on Cloudflare Workers with Google authentication, a Supabase backend, and a built-in AI coach. Progress renders as a growing tree, translating streak consistency into visible growth.</p>
           <div class="card-foot">
             <div class="labels">
-              <span class="pill">Placeholder</span>
-              <span class="pill">Placeholder</span>
+              <span class="pill">Full-Stack</span>
+              <span class="pill">Supabase</span>
+              <span class="pill">AI</span>
+            </div>
+            <a href="https://bloom.jakecapmeil.workers.dev/" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Visit ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="media"><img src="chroma1.png" alt="Khromate" loading="lazy" /></div>
+        <div class="project-body">
+          <p class="meta">Solo · 2025</p>
+          <h3>Khromate</h3>
+          <p>Generative art platform where users produce royalty-free work from coded algorithms, then download it or publish it to a shared in-site gallery.</p>
+          <div class="card-foot">
+            <div class="labels">
+              <span class="pill">Generative Art</span>
+              <span class="pill">Full-Stack</span>
             </div>
             <a href="https://khromate.jakecapmeil.workers.dev/" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Visit ↗</a>
           </div>
@@ -515,19 +535,89 @@
         </div>
       </article>
 
-      <article class="project-card reveal">
-        <div class="media">Image</div>
-        <div class="project-body">
-          <p class="meta">Placeholder · Year</p>
-          <h3>Centriphone</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder copy pending final project description — details to be supplied. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-          <div class="labels">
-            <span class="pill">Placeholder</span>
-            <span class="pill">Placeholder</span>
-          </div>
-        </div>
-      </article>
+    </div>
+  </div>
+</section>
 
+<!-- TOOLKIT -->
+<section id="toolkit" class="sec-light">
+  <svg class="bp bp-light bp-tr" viewBox="0 0 240 240" aria-hidden="true">
+    <rect x="52" y="52" width="136" height="136" rx="10"/>
+    <rect x="80" y="80" width="80" height="80" rx="6" stroke-dasharray="4 4"/>
+    <circle cx="120" cy="120" r="3"/>
+    <path d="M120 24v192M24 120h192" stroke-dasharray="8 5 2 5"/>
+    <path d="M188 52h34M120 24h102"/>
+    <path d="M214 52l-4 6 8 0-4-6"/>
+  </svg>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="rule"></div>
+      <span class="eyebrow"><span class="snum">03</span> Toolkit</span>
+      <h2>Capabilities</h2>
+      <p>The stack behind the research and the builds.</p>
+    </div>
+    <div class="community-grid reveal">
+      <div class="community-card">
+        <h3>Programming &amp; Data</h3>
+        <div class="labels">
+          <span class="pill">Python</span>
+          <span class="pill">pandas</span>
+          <span class="pill">Supervised Learning</span>
+          <span class="pill">Neural Networks</span>
+          <span class="pill">Data Pipelines</span>
+          <span class="pill">Game Development</span>
+        </div>
+      </div>
+      <div class="community-card">
+        <h3>Full-Stack</h3>
+        <div class="labels">
+          <span class="pill">Supabase</span>
+          <span class="pill">GitHub</span>
+          <span class="pill">Cloudflare</span>
+          <span class="pill">Render</span>
+          <span class="pill">Netlify</span>
+        </div>
+      </div>
+      <div class="community-card">
+        <h3>AI-Assisted Engineering</h3>
+        <div class="labels">
+          <span class="pill">Claude Code</span>
+          <span class="pill">Agent Workflows</span>
+          <span class="pill">CLAUDE.md Specs</span>
+          <span class="pill">AI-Assisted Data Analysis</span>
+          <span class="pill">End-to-End Deployment</span>
+        </div>
+      </div>
+      <div class="community-card">
+        <h3>Lab Techniques</h3>
+        <div class="labels">
+          <span class="pill">PCR</span>
+          <span class="pill">Gel Electrophoresis</span>
+          <span class="pill">Micropipetting</span>
+          <span class="pill">Distillation</span>
+        </div>
+      </div>
+      <div class="community-card">
+        <h3>Music Production</h3>
+        <div class="labels">
+          <span class="pill">Recording Hardware</span>
+          <span class="pill">DAWs</span>
+          <span class="pill">Sampling</span>
+          <span class="pill">Piano</span>
+        </div>
+      </div>
+      <div class="community-card">
+        <h3>Software</h3>
+        <div class="labels">
+          <span class="pill">Logic Pro</span>
+          <span class="pill">Pixelmator Pro</span>
+          <span class="pill">Affinity</span>
+          <span class="pill">Adobe Express</span>
+          <span class="pill">Excel</span>
+          <span class="pill">Word</span>
+          <span class="pill">PowerPoint</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -550,20 +640,25 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="rule"></div>
-      <span class="eyebrow"><span class="snum">03</span> Programs &amp; Honors</span>
+      <span class="eyebrow"><span class="snum">04</span> Programs &amp; Honors</span>
       <h2>Academic Track</h2>
       <p>Selective programs, recognition, and leadership built on coursework across CS, math, and the sciences.</p>
     </div>
     <div class="honors-grid reveal">
+      <div class="honor-card" style="grid-column: 1 / -1;">
+        <span class="tag">Summer 2026</span>
+        <h3>CMU CS Scholars</h3>
+        <p>Fully funded, merit-based residential program with a ~4% acceptance rate. Four weeks of college-level CS and Graph Theory coursework alongside a research project presented at a closing symposium.</p>
+      </div>
       <div class="honor-card">
         <span class="tag">2025–26</span>
         <h3>Science Research Seminar</h3>
         <p>Highly selective seminar preparing students for lab research. I passed a qualifying exam and completed a rigorous accompanying course in machine learning and advanced Python, with training in managing, processing, and analyzing research data.</p>
       </div>
       <div class="honor-card">
-        <span class="tag">2024–26</span>
+        <span class="tag">2025–Present</span>
         <h3>Cross Country &amp; Track Captain</h3>
-        <p>Captain of my school's running teams, specializing in the 800m. At the Cities championship I placed 4th in the 800m and 2nd in the 4×400m relay.</p>
+        <p>Captain of my school's running teams, specializing in the 800m. At the PSAL Sophomore Championship I placed 4th in the 800m and 2nd in the 4×400m relay.</p>
       </div>
       <div class="honor-card">
         <span class="tag">2025–26</span>
@@ -578,12 +673,14 @@
     </div>
     <div class="coursework reveal">
       <span class="label">Coursework</span>
-      <span class="course-pill">AP Computer Science</span>
+      <span class="course-pill">AP CS A</span>
+      <span class="course-pill">Honors Computer Science</span>
+      <span class="course-pill">Extended-Honors Math</span>
       <span class="course-pill">Honors Physics</span>
       <span class="course-pill">AP French</span>
       <span class="course-pill">Honors English</span>
       <span class="course-pill">Honors US History</span>
-      <a href="#" class="course-pill">View Transcript ↗</a>
+      <a href="Jake_Capmeil_Transcript.pdf" class="course-pill" target="_blank" rel="noopener">View Transcript ↗</a>
     </div>
   </div>
 </section>
@@ -593,15 +690,15 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="rule"></div>
-      <span class="eyebrow"><span class="snum">04</span> Community</span>
+      <span class="eyebrow"><span class="snum">05</span> Community</span>
       <h2>Community Impact</h2>
       <p>Building things that reach beyond the lab and the track.</p>
     </div>
     <div class="community-grid">
       <div class="community-card reveal">
-        <span class="when">2024 — Present</span>
+        <span class="when">2025 — Present</span>
         <h3>Interact Club of Chinatown</h3>
-        <p>Vice President and founding member of the youth arm of Chinatown's Rotary Club. Raised $1,500 in year one, then grew membership and ran recurring volunteer and fundraising events.</p>
+        <p>Vice President and founding member of the youth arm of Chinatown's Rotary Club. Raised $1,500 in year one, then grew membership and ran recurring volunteer and fundraising events. Also runs the club socials and the club website.</p>
       </div>
       <div class="community-card reveal">
         <span class="when">2024 — Present</span>
@@ -609,9 +706,14 @@
         <p>Volunteer with nonprofit surf instruction and water-safety programming for underserved youth across NYC summers.</p>
       </div>
       <div class="community-card reveal">
-        <span class="when">2023 — Present</span>
+        <span class="when">2025 — Present</span>
         <h3>Catholic Church Volunteer</h3>
         <p>Biweekly refugee clothing drives, multilingual book drives, and general property maintenance for the parish community.</p>
+      </div>
+      <div class="community-card reveal">
+        <span class="when">2024 — Present</span>
+        <h3>Photography Assistant</h3>
+        <p>On-set production support, promotional shooting and editing, and fine-art print preparation for gallery clients.</p>
       </div>
     </div>
   </div>
@@ -626,8 +728,8 @@
     </div>
     <div class="social">
       <a href="mailto:jakecapmeil@gmail.com">Email</a>
-      <a href="#">GitHub</a>
-      <a href="#">LinkedIn</a>
+      <a href="https://github.com/jakecapmeil" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/jake-capmeil/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
 </footer>
