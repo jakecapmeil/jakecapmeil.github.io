@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Jake Capmeil — Student Researcher</title>
+<title>Jake Capmeil · Student Researcher</title>
 <meta name="description" content="Jake Capmeil, Hunter College High School student researcher focused on autonomous vehicles and robotics." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -211,18 +211,19 @@
     width: 78px; height: 78px; border-radius: 50%;
     border: 1px solid var(--blue); opacity: 0.4; z-index: -1;
   }
-  .photo-frame img { display: block; width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/5; }
+  .photo-frame img { display: block; width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/4.2; }
 
   /* ---------- CONTACT STRIP ---------- */
-  .strip { background: var(--offwhite); border-top: 1px solid var(--line); padding: 26px 0; }
+  .strip { background: var(--offwhite); border-top: 1px solid var(--line); padding: 34px 0; }
   .strip-box {
-    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
   }
   .dot-live {
     width: 8px; height: 8px; border-radius: 50%; background: #4C9A6A; flex-shrink: 0;
   }
-  .strip-text { flex: 1; font-size: 0.95rem; color: var(--muted); min-width: 260px; }
+  .strip-text { flex: 1; font-size: 0.98rem; color: var(--muted); min-width: 300px; line-height: 1.55; }
   .strip-text strong { color: var(--ink); font-weight: 600; }
+  .strip-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
   /* ---------- MEDIA PLACEHOLDER ---------- */
   .media {
@@ -328,6 +329,34 @@
   .community-card h3 { font-size: 1.12rem; margin-bottom: 10px; }
   .community-card p { color: var(--muted); font-size: 0.93rem; }
 
+  /* ---------- TOOLKIT ---------- */
+  .toolkit-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .tool-card {
+    position: relative; overflow: hidden;
+    background: var(--white); border: 1px solid var(--line);
+    border-top: 2px solid var(--blue); border-radius: var(--radius);
+    padding: 26px 26px 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .tool-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(16,24,40,0.06); border-color: #C9D3DF; }
+  .tool-card::after {
+    content: ''; position: absolute; top: 18px; right: 18px;
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 1px solid var(--blue); opacity: 0.16;
+  }
+  .tool-head { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .tool-idx {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+    font-size: 0.68rem; font-variant-numeric: tabular-nums; letter-spacing: 0.08em;
+    color: var(--blue); border: 1px solid var(--blue); border-radius: 999px;
+    padding: 2px 8px; opacity: 0.85;
+  }
+  .tool-head h3 { font-size: 1.02rem; }
+  .tool-card .labels { gap: 7px; }
+  .tool-card .pill { transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease; }
+  .tool-card:hover .pill { border-color: #D3DBE4; }
+  .tool-card .pill:hover { background: var(--blue-soft); border-color: var(--blue-light); color: var(--blue); }
+
   /* ---------- FOOTER ---------- */
   footer { background: var(--navy-deep); color: var(--white); padding: 56px 0 44px; }
   .footer-grid { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
@@ -351,7 +380,7 @@
     .hero-grid { grid-template-columns: 1fr; gap: 44px; }
     .photo-frame { max-width: 380px; }
     .research-row { grid-template-columns: 1fr; gap: 32px; }
-    .project-grid, .honors-grid, .community-grid { grid-template-columns: 1fr; }
+    .project-grid, .honors-grid, .community-grid, .toolkit-grid { grid-template-columns: 1fr; }
     section { padding: 76px 0; }
   }
   @media (max-width: 720px) {
@@ -417,8 +446,12 @@
 <div class="strip">
   <div class="wrap strip-box">
     <span class="dot-live"></span>
-    <p class="strip-text">Currently seeking <strong>internships and research opportunities in the New York area</strong>.</p>
-    <a href="mailto:jakecapmeil@gmail.com" class="btn btn-primary">Get in Touch</a>
+    <p class="strip-text">Currently seeking <strong>internships and research opportunities in the New York area</strong>. Open to machine learning research, full-stack software, and hands-on lab and engineering work. The fastest way to reach me is email, but I am on LinkedIn and GitHub too.</p>
+    <div class="strip-actions">
+      <a href="https://www.linkedin.com/in/jake-capmeil/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/jakecapmeil" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:jakecapmeil@gmail.com" class="btn btn-primary">Email Me</a>
+    </div>
   </div>
 </div>
 
@@ -451,8 +484,7 @@
       <div>
         <p class="meta">Carnegie Mellon University · Summer 2026</p>
         <h3>Threshold Tuning Under Class Imbalance for Predicting Student Preference in AI-Assisted Tutoring</h3>
-        <p style="font-style: italic; color: var(--muted-dark); margin: -6px 0 16px; font-size: 0.98rem;">“AI or a Human?”</p>
-        <p>Mentored research at Carnegie Mellon's CS Scholars Program modeling student preference for AI versus human tutoring. I compared three classifiers using stratified k-fold cross-validation, optimized for MCC, and applied threshold tuning to correct for class imbalance in a small self-collected dataset — a proof of concept for prediction under the data constraints most institutions actually face.</p>
+        <p>Mentored research at Carnegie Mellon's CS Scholars Program modeling student preference for AI versus human tutoring. I compared three classifiers using stratified k-fold cross-validation, optimized for MCC, and applied threshold tuning to correct for class imbalance in a small self-collected dataset. It stands as a proof of concept for prediction under the data constraints most institutions actually face.</p>
         <div class="labels">
           <span class="pill">Machine Learning</span>
           <span class="pill">Python</span>
@@ -460,7 +492,7 @@
           <span class="pill">Statistical Modeling</span>
         </div>
       </div>
-      <div class="media"><img src="research.png" alt="Logistic regression decision boundary over PCA components" loading="lazy" /></div>
+      <div class="media" style="aspect-ratio: 4 / 3;"><img src="research.png" alt="Logistic regression decision boundary over PCA components" loading="lazy" /></div>
     </div>
   </div>
 </section>
@@ -504,7 +536,7 @@
               <span class="pill">Generative Art</span>
               <span class="pill">Full-Stack</span>
             </div>
-            <a href="https://khromate.jakecapmeil.workers.dev/" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Visit ↗</a>
+            <a href="https://khromate.com" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Visit ↗</a>
           </div>
         </div>
       </article>
@@ -513,7 +545,7 @@
         <div class="media">Image</div>
         <div class="project-body">
           <p class="meta">Solo · 2024</p>
-          <h3>Ocean Bathymetry &amp; Wave Size</h3>
+          <h3>Bathymetric Control of Breaking Wave Height in Shoaling Nearshore Environments</h3>
           <p>Designed and built a working wave tank with interchangeable seafloor topographies to quantify how slope, depth, and contour reshape a wave. I measured propagation and shoaling across each model.</p>
           <div class="labels">
             <span class="pill">Physics</span>
@@ -526,7 +558,7 @@
         <div class="media">Image</div>
         <div class="project-body">
           <p class="meta">Team · 2025</p>
-          <h3>Wing Shape &amp; Flight</h3>
+          <h3>Aspect Ratio Effects on Flight Performance at Fixed Planform Area in Free-Flight Gliders</h3>
           <p>Engineered a modular sailplane that swaps wings of equal area but different aspect ratios, then ran systematic flight trials to isolate what drives lift, stability, and glide efficiency.</p>
           <div class="labels">
             <span class="pill">Aerodynamics</span>
@@ -556,9 +588,9 @@
       <h2>Capabilities</h2>
       <p>The stack behind the research and the builds.</p>
     </div>
-    <div class="community-grid reveal">
-      <div class="community-card">
-        <h3>Programming &amp; Data</h3>
+    <div class="toolkit-grid reveal">
+      <div class="tool-card">
+        <div class="tool-head"><span class="tool-idx">01</span><h3>Programming &amp; Data</h3></div>
         <div class="labels">
           <span class="pill">Python</span>
           <span class="pill">pandas</span>
@@ -568,8 +600,8 @@
           <span class="pill">Game Development</span>
         </div>
       </div>
-      <div class="community-card">
-        <h3>Full-Stack</h3>
+      <div class="tool-card">
+        <div class="tool-head"><span class="tool-idx">02</span><h3>Full-Stack</h3></div>
         <div class="labels">
           <span class="pill">Supabase</span>
           <span class="pill">GitHub</span>
@@ -578,8 +610,8 @@
           <span class="pill">Netlify</span>
         </div>
       </div>
-      <div class="community-card">
-        <h3>AI-Assisted Engineering</h3>
+      <div class="tool-card">
+        <div class="tool-head"><span class="tool-idx">03</span><h3>AI-Assisted Engineering</h3></div>
         <div class="labels">
           <span class="pill">Claude Code</span>
           <span class="pill">Agent Workflows</span>
@@ -588,8 +620,8 @@
           <span class="pill">End-to-End Deployment</span>
         </div>
       </div>
-      <div class="community-card">
-        <h3>Lab Techniques</h3>
+      <div class="tool-card">
+        <div class="tool-head"><span class="tool-idx">04</span><h3>Lab Techniques</h3></div>
         <div class="labels">
           <span class="pill">PCR</span>
           <span class="pill">Gel Electrophoresis</span>
@@ -597,8 +629,8 @@
           <span class="pill">Distillation</span>
         </div>
       </div>
-      <div class="community-card">
-        <h3>Music Production</h3>
+      <div class="tool-card">
+        <div class="tool-head"><span class="tool-idx">05</span><h3>Music Production</h3></div>
         <div class="labels">
           <span class="pill">Recording Hardware</span>
           <span class="pill">DAWs</span>
@@ -606,8 +638,8 @@
           <span class="pill">Piano</span>
         </div>
       </div>
-      <div class="community-card">
-        <h3>Software</h3>
+      <div class="tool-card">
+        <div class="tool-head"><span class="tool-idx">06</span><h3>Software</h3></div>
         <div class="labels">
           <span class="pill">Logic Pro</span>
           <span class="pill">Pixelmator Pro</span>
@@ -658,7 +690,7 @@
       <div class="honor-card">
         <span class="tag">2025–Present</span>
         <h3>Cross Country &amp; Track Captain</h3>
-        <p>Captain of my school's running teams, specializing in the 800m. At the PSAL Sophomore Championship I placed 4th in the 800m and 2nd in the 4×400m relay.</p>
+        <p>Year-round varsity athlete training 7 days/week, top-ranked in school. Won 2nd in the PSAL Sophomore 4×400m and 4th in the 800m in his first season. Team leader who runs workouts, mentors, and assists race-day logistics.</p>
       </div>
       <div class="honor-card">
         <span class="tag">2025–26</span>
@@ -696,22 +728,22 @@
     </div>
     <div class="community-grid">
       <div class="community-card reveal">
-        <span class="when">2025 — Present</span>
+        <span class="when">2025–Present</span>
         <h3>Interact Club of Chinatown</h3>
         <p>Vice President and founding member of the youth arm of Chinatown's Rotary Club. Raised $1,500 in year one, then grew membership and ran recurring volunteer and fundraising events. Also runs the club socials and the club website.</p>
       </div>
       <div class="community-card reveal">
-        <span class="when">2024 — Present</span>
+        <span class="when">2024–Present</span>
         <h3>Laru Beya Volunteer</h3>
         <p>Volunteer with nonprofit surf instruction and water-safety programming for underserved youth across NYC summers.</p>
       </div>
       <div class="community-card reveal">
-        <span class="when">2025 — Present</span>
+        <span class="when">2025–Present</span>
         <h3>Catholic Church Volunteer</h3>
         <p>Biweekly refugee clothing drives, multilingual book drives, and general property maintenance for the parish community.</p>
       </div>
       <div class="community-card reveal">
-        <span class="when">2024 — Present</span>
+        <span class="when">2024–Present</span>
         <h3>Photography Assistant</h3>
         <p>On-set production support, promotional shooting and editing, and fine-art print preparation for gallery clients.</p>
       </div>
