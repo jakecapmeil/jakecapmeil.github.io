@@ -386,9 +386,29 @@
   .fname { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1rem; }
   .fname .dot { color: var(--blue-light); }
   .copy { color: #6C7A92; font-size: 0.85rem; margin-top: 6px; }
-  .social { display: flex; gap: 24px; }
-  .social a { color: var(--muted-dark); text-decoration: none; font-size: 0.9rem; transition: color 0.18s ease; }
+  .social { display: flex; gap: 28px; }
+  .social a {
+    position: relative;
+    color: var(--muted-dark); text-decoration: none; font-size: 0.9rem;
+    padding-bottom: 9px;
+    transition: color 0.18s ease;
+  }
+  /* dimension-rule underline: hairline with witness ticks at both ends */
+  .social a::before {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 1px; background: var(--navy-line);
+    transition: background 0.18s ease;
+  }
+  .social a::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 7px;
+    border-left: 1px solid var(--navy-line);
+    border-right: 1px solid var(--navy-line);
+    transition: border-color 0.18s ease;
+  }
   .social a:hover { color: var(--blue-light); }
+  .social a:hover::before { background: var(--blue-light); }
+  .social a:hover::after { border-color: var(--blue-light); }
 
   /* ---------- REVEAL ---------- */
   .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
@@ -567,19 +587,6 @@
       </article>
 
       <article class="project-card reveal">
-        <div class="media"><img src="wave-tank-side-dark.png" alt="Wave tank side-view diagram showing a paddle generating waves that shoal over a sloped seafloor" loading="lazy" /></div>
-        <div class="project-body">
-          <p class="meta">Solo · 2024</p>
-          <h3>Bathymetric Control of Breaking Wave Height in Shoaling Nearshore Environments</h3>
-          <p>Designed and built a working wave tank with interchangeable seafloor topographies to quantify how slope, depth, and contour reshape a wave. Measured propagation and shoaling across each model.</p>
-          <div class="labels">
-            <span class="pill">Physics</span>
-            <span class="pill">Fluid Dynamics</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="project-card reveal">
         <div class="media"><img src="glider-wing-plan.png" alt="Plan view of three glider wings of equal area with varying aspect ratio" loading="lazy" /></div>
         <div class="project-body">
           <p class="meta">Team · 2025</p>
@@ -588,6 +595,19 @@
           <div class="labels">
             <span class="pill">Aerodynamics</span>
             <span class="pill">Design</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="media"><img src="wave-tank-side-dark.png" alt="Wave tank side-view diagram showing a paddle generating waves that shoal over a sloped seafloor" loading="lazy" /></div>
+        <div class="project-body">
+          <p class="meta">Solo · 2024</p>
+          <h3>Bathymetric Control of Breaking Wave Height in Shoaling Nearshore Environments</h3>
+          <p>Designed and built a working wave tank with interchangeable seafloor topographies to quantify how slope, depth, and contour reshape a wave. Measured propagation and shoaling across each model.</p>
+          <div class="labels">
+            <span class="pill">Physics</span>
+            <span class="pill">Fluid Dynamics</span>
           </div>
         </div>
       </article>
